@@ -8,7 +8,6 @@
 import UIKit
 
 class ImageModel: Codable {
-    let id: Int
     let tags: String
     
     let previewURL: String

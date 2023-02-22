@@ -68,7 +68,6 @@
 				C3EE380529A5BFB500AECA5C /* Presenter */,
 				C3EE380429A5BF3F00AECA5C /* View */,
 				C3EE37F929A5BECF00AECA5C /* Assets.xcassets */,
-				C3EE37F629A5BECF00AECA5C /* Main.storyboard */,
 				C3EE37FB29A5BECF00AECA5C /* LaunchScreen.storyboard */,
 				C3EE37F029A5BECF00AECA5C /* AppDelegate.swift */,
 				C3EE37F229A5BECF00AECA5C /* SceneDelegate.swift */,
@@ -82,6 +81,7 @@
 			children = (
 				C3EE37F429A5BECF00AECA5C /* ImageSearchViewController.swift */,
 				C3EE380E29A5C0B300AECA5C /* ImageCollectionViewCell.swift */,
+				C3EE37F629A5BECF00AECA5C /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
