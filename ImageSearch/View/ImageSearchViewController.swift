@@ -13,27 +13,38 @@ class ImageSearchViewController: UIViewController, ImageSearchPresenterDelegate 
     
     @IBOutlet weak var searchText: UITextField!
     var sText: String = ""
+    var pageNumber: Int = Constants.pageNumberInit
+    
+    var imageTapped:Int = 0
     
     @IBOutlet weak var imageCollection: UICollectionView!
     var imagesList = [ImageModel]()
     
-    private let presenter = ImageSearchPresenter()
+    let presenter = ImageSearchPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initSearchField()
+        initApp()
     }
     
-    func initSearchField(){
-        if let value = userDefaults.value(forKey: "lastSearch") as? String {
-            searchText.text = value
-        }
+    func initApp(){
         collectionConfiguration()
+        presenter.setViewDelegate(delegate: self)
+        
+        // default text in search field
+        if let value = userDefaults.value(forKey: Constants.identifiers.lastSearch) as? String {
+            searchText.text = value
+            // show filtered images
+            self.setUpData(searchText: value)
+        } else {
+            // show all images
+            self.setUpData(searchText: "")
+        }
     }
         
     private func collectionConfiguration(){
         if let layout = imageCollection.collectionViewLayout as? UICollectionViewFlowLayout {
-                layout.estimatedItemSize = CGSize(width: 50, height: 50)
+            layout.estimatedItemSize = CGSize(width: Constants.collectionConfig.size, height: Constants.collectionConfig.size)
                 layout.itemSize = UICollectionViewFlowLayout.automaticSize
             }
         imageCollection.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.identifier)
@@ -42,17 +53,29 @@ class ImageSearchViewController: UIViewController, ImageSearchPresenterDelegate 
     @IBAction func SearchButtonPressed(_ sender: UIButton) {
         self.sText = (searchText.text ?? "") as String
             
-        // Presenter
-        presenter.setViewDelegate(delegate: self)
-        presenter.getImages(searchText: self.sText)
+        // clean
+        self.presenter.clearAllImages()
+        
+        // show filtered images
+        self.pageNumber = Constants.pageNumberInit
+        self.setUpData(searchText: self.sText)
             
         // Save last search
         saveSearchField()
     }
     
+    func setUpData(searchText: String){
+        presenter.getImages(searchText: searchText.lowercased(), pageNumber: self.pageNumber) { (imagesResult) in
+            if !imagesResult.isEmpty {
+                self.presenter.setImages(imagesRecieved: imagesResult)
+            }
+        }
+        
+    }
+    
     func saveSearchField(){
         if !self.sText.isEmpty {
-            userDefaults.setValue(self.sText, forKey: "lastSearch")
+            userDefaults.setValue(self.sText, forKey: Constants.identifiers.lastSearch)
         }
     }
 
@@ -62,6 +85,11 @@ class ImageSearchViewController: UIViewController, ImageSearchPresenterDelegate 
         DispatchQueue.main.async {
             self.imageCollection.reloadData()
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let VC = segue.destination as! FullImageViewController
+        VC.imageModel = presenter.getImages()[self.imageTapped]
     }
     
 }
@@ -77,6 +105,25 @@ extension ImageSearchViewController: UICollectionViewDelegate, UICollectionViewD
         let cell = imageCollection.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.identifier, for: indexPath) as! ImageCollectionViewCell
         cell.setImageInCell(model: imagesList[indexPath.row])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       self.imageTapped = indexPath.row
+        performSegue(withIdentifier: Constants.identifiers.segueId, sender: self)
+   }
+    
+    internal func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset
+        let bounds = scrollView.bounds
+        let size = scrollView.contentSize
+        let inset = scrollView.contentInset
+        let y = offset.y + bounds.size.height - inset.bottom
+        let h = size.height
+        let reload_distance:CGFloat = 10.0
+        if y > (h + reload_distance) {
+            self.pageNumber = self.pageNumber + 1
+            setUpData(searchText: self.sText)
+        }
     }
 
 }

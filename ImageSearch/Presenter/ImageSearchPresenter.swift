@@ -16,28 +16,40 @@ typealias PresenterDelegate = ImageSearchPresenterDelegate & UIViewController
 
 class ImageSearchPresenter {
     weak var delegate: PresenterDelegate?
+        
+    private var images: [ImageModel] = []
     
-    public func getImages(searchText: String){
-        guard let url = URL(string: "https://pixabay.com/api/?q=kittens&key=6814610-cd083c066ad38bb511337fb2b") else { return }
-        let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+    public func getImages(searchText: String, pageNumber: Int, completion:@escaping([ImageModel])->()) {
+        guard let url = URL(string: Constants.getUrl(searchStr: searchText, page: pageNumber)) else { return }
+        let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil else {
                 return
             }
             do {
                 let res = try JSONDecoder().decode(Container.self, from: data)
-                let allImages = res.hits
-                
-                // filter
-                let filteredImages = allImages.filter({ (image) -> Bool in
-                    return image.tags.split(separator: ",").contains{$0 == searchText} })
-
-                self?.delegate?.presentImages(images: filteredImages)
+                let imagesResult: [ImageModel] = res.hits
+                completion(imagesResult)
             }
             catch {
                 print(error)
             }
         }
         task.resume()
+    }
+    
+    public func setImages(imagesRecieved:[ImageModel]){
+        for item in imagesRecieved {
+            self.images.append(item)
+        }
+        self.delegate?.presentImages(images: self.images)
+    }
+    
+    public func getImages() -> [ImageModel]{
+        return self.images
+    }
+    
+    public func clearAllImages(){
+        self.images = []
     }
     
     public func setViewDelegate(delegate: PresenterDelegate){

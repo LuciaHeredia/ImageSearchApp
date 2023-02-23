@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C31F5E2E29A6DE950081B735 /* FullImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31F5E2D29A6DE950081B735 /* FullImageViewController.swift */; };
+		C31F5E3029A6E3E40081B735 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31F5E2F29A6E3E40081B735 /* UIImageExtension.swift */; };
+		C3D59DC529A682E8009C093F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D59DC429A682E8009C093F /* Constants.swift */; };
 		C3EE37F129A5BECF00AECA5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EE37F029A5BECF00AECA5C /* AppDelegate.swift */; };
 		C3EE37F329A5BECF00AECA5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EE37F229A5BECF00AECA5C /* SceneDelegate.swift */; };
 		C3EE37F529A5BECF00AECA5C /* ImageSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EE37F429A5BECF00AECA5C /* ImageSearchViewController.swift */; };
@@ -20,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C31F5E2D29A6DE950081B735 /* FullImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullImageViewController.swift; sourceTree = "<group>"; };
+		C31F5E2F29A6E3E40081B735 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		C3D59DC429A682E8009C093F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C3EE37ED29A5BECF00AECA5C /* ImageSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3EE37F029A5BECF00AECA5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3EE37F229A5BECF00AECA5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +51,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C3D59DC629A683E8009C093F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C3D59DC429A682E8009C093F /* Constants.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		C3EE37E429A5BECF00AECA5C = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +78,7 @@
 		C3EE37EF29A5BECF00AECA5C /* ImageSearch */ = {
 			isa = PBXGroup;
 			children = (
+				C3D59DC629A683E8009C093F /* Helpers */,
 				C3EE380829A5C03900AECA5C /* Model */,
 				C3EE380529A5BFB500AECA5C /* Presenter */,
 				C3EE380429A5BF3F00AECA5C /* View */,
@@ -82,6 +97,7 @@
 				C3EE37F429A5BECF00AECA5C /* ImageSearchViewController.swift */,
 				C3EE380E29A5C0B300AECA5C /* ImageCollectionViewCell.swift */,
 				C3EE37F629A5BECF00AECA5C /* Main.storyboard */,
+				C31F5E2D29A6DE950081B735 /* FullImageViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -90,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				C3EE380629A5BFD700AECA5C /* ImageSearchPresenter.swift */,
+				C31F5E2F29A6E3E40081B735 /* UIImageExtension.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -176,11 +193,14 @@
 			files = (
 				C3EE37F529A5BECF00AECA5C /* ImageSearchViewController.swift in Sources */,
 				C3EE380D29A5C08800AECA5C /* Container.swift in Sources */,
+				C31F5E2E29A6DE950081B735 /* FullImageViewController.swift in Sources */,
+				C31F5E3029A6E3E40081B735 /* UIImageExtension.swift in Sources */,
 				C3EE37F129A5BECF00AECA5C /* AppDelegate.swift in Sources */,
 				C3EE380F29A5C0B300AECA5C /* ImageCollectionViewCell.swift in Sources */,
 				C3EE380729A5BFD700AECA5C /* ImageSearchPresenter.swift in Sources */,
 				C3EE37F329A5BECF00AECA5C /* SceneDelegate.swift in Sources */,
 				C3EE380B29A5C06600AECA5C /* ImageModel.swift in Sources */,
+				C3D59DC529A682E8009C093F /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

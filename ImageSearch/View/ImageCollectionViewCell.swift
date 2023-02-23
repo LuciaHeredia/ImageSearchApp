@@ -9,7 +9,7 @@ import UIKit
 
 class ImageCollectionViewCell: UICollectionViewCell {
         
-    static let identifier = "ImageCollectionViewCell"
+    static let identifier = Constants.identifiers.collectionViewCellId
     var frameCell: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
 
     public let imageInCell: UIImageView = {
@@ -49,25 +49,3 @@ class ImageCollectionViewCell: UICollectionViewCell {
        }
     
 }
-
-extension UIImageView {
-    func downloadImage(url: URL){
-
-        //contentMode = .scaleToFill
-        let dataTask = URLSession.shared.dataTask(with: url, completionHandler: {
-            (data, response, error) in
-            guard let urlResponse = response as? HTTPURLResponse, urlResponse.statusCode == 200,
-                let data = data, error == nil,
-                let image = UIImage(data: data)
-            else {
-                print("Error while getting image from URL.")
-                return
-            }
-            DispatchQueue.main.async {
-                self.image = image
-            }
-        })
-        dataTask.resume()
-    }
-}
-
