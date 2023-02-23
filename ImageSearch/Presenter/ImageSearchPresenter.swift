@@ -17,7 +17,7 @@ typealias PresenterDelegate = ImageSearchPresenterDelegate & UIViewController
 class ImageSearchPresenter {
     weak var delegate: PresenterDelegate?
         
-    private var images: [ImageModel] = []
+    private var images = ImagesHolder()
     
     public func getImages(searchText: String, pageNumber: Int, completion:@escaping([ImageModel])->()) {
         guard let url = URL(string: Constants.getUrl(searchStr: searchText, page: pageNumber)) else { return }
@@ -39,19 +39,17 @@ class ImageSearchPresenter {
     }
     
     public func setImages(imagesRecieved:[ImageModel]){
-        for item in imagesRecieved {
-            self.images.append(item)
-        }
-        self.delegate?.presentImages(images: self.images)
+        self.images.setImagesToArray(imagesRecieved: imagesRecieved)
+        self.delegate?.presentImages(images: self.images.getImagesArray())
     }
     
     public func getImages() -> [ImageModel]{
-        return self.images
+        return self.images.getImagesArray()
     }
     
     public func clearAllImages(){
-        self.images = []
-        self.delegate?.presentImages(images: self.images)
+        self.images.emptyArray()
+        self.delegate?.presentImages(images: self.images.getImagesArray())
     }
     
     public func setViewDelegate(delegate: PresenterDelegate){

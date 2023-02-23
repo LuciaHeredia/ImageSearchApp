@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C313D38429A71034007A4A33 /* ImagesHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C313D38329A71034007A4A33 /* ImagesHolder.swift */; };
 		C31F5E2E29A6DE950081B735 /* FullImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31F5E2D29A6DE950081B735 /* FullImageViewController.swift */; };
 		C31F5E3029A6E3E40081B735 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31F5E2F29A6E3E40081B735 /* UIImageExtension.swift */; };
 		C3D59DC529A682E8009C093F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D59DC429A682E8009C093F /* Constants.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C313D38329A71034007A4A33 /* ImagesHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesHolder.swift; sourceTree = "<group>"; };
 		C31F5E2D29A6DE950081B735 /* FullImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullImageViewController.swift; sourceTree = "<group>"; };
 		C31F5E2F29A6E3E40081B735 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		C3D59DC429A682E8009C093F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -114,8 +116,9 @@
 		C3EE380829A5C03900AECA5C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C3EE380A29A5C06600AECA5C /* ImageModel.swift */,
 				C3EE380C29A5C08800AECA5C /* Container.swift */,
+				C3EE380A29A5C06600AECA5C /* ImageModel.swift */,
+				C313D38329A71034007A4A33 /* ImagesHolder.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				C3EE37F529A5BECF00AECA5C /* ImageSearchViewController.swift in Sources */,
 				C3EE380D29A5C08800AECA5C /* Container.swift in Sources */,
 				C31F5E2E29A6DE950081B735 /* FullImageViewController.swift in Sources */,
+				C313D38429A71034007A4A33 /* ImagesHolder.swift in Sources */,
 				C31F5E3029A6E3E40081B735 /* UIImageExtension.swift in Sources */,
 				C3EE37F129A5BECF00AECA5C /* AppDelegate.swift in Sources */,
 				C3EE380F29A5C0B300AECA5C /* ImageCollectionViewCell.swift in Sources */,
