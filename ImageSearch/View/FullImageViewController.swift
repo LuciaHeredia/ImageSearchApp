@@ -11,26 +11,39 @@ class FullImageViewController: UIViewController {
 
     var imageModel: ImageModel? = nil
     
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        debugPrint("Full Image View.")
         
+        // loading spinner
+        spinner.startAnimating()
+        
+        // show NavBar
         self.navigationController?.isNavigationBarHidden = false
         
-        imageViewSettings()
         initImageView()
-    }
-    
-    func imageViewSettings(){
-        var frameCell: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
-        frameCell.size = CGSize(width: imageModel!.previewWidth, height: imageModel!.previewHeight)
-        imageView.frame = frameCell
     }
     
     func initImageView(){
         guard let imageUrl = URL(string: imageModel!.largeImageURL) else { return}
         self.imageView.downloadImage(url: imageUrl)
+    }
+    
+    override func didMove(toParent parent: UIViewController?) {
+        super.didMove(toParent: parent)
+
+        if parent == nil {
+            debugPrint("Back Btn pressed.")
+            if self.spinner.isAnimating{
+                // stop loading spinner
+                self.spinner.stopAnimating()
+                // hiding spinner
+                self.spinner.isHidden = true
+            }
+        }
     }
     
 }

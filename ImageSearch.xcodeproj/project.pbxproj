@@ -55,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				C3D59DC429A682E8009C093F /* Constants.swift */,
+				C31F5E2F29A6E3E40081B735 /* UIImageExtension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -106,7 +107,6 @@
 			isa = PBXGroup;
 			children = (
 				C3EE380629A5BFD700AECA5C /* ImageSearchPresenter.swift */,
-				C31F5E2F29A6E3E40081B735 /* UIImageExtension.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";

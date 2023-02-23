@@ -16,7 +16,7 @@ class ImageSearchViewController: UIViewController, ImageSearchPresenterDelegate 
     var pageNumber: Int = Constants.pageNumberInit
     
     var imageTapped:Int = 0
-    
+        
     @IBOutlet weak var imageCollection: UICollectionView!
     var imagesList = [ImageModel]()
     
@@ -68,9 +68,12 @@ class ImageSearchViewController: UIViewController, ImageSearchPresenterDelegate 
         presenter.getImages(searchText: searchText.lowercased(), pageNumber: self.pageNumber) { (imagesResult) in
             if !imagesResult.isEmpty {
                 self.presenter.setImages(imagesRecieved: imagesResult)
+            } else {
+                // clean
+                self.presenter.clearAllImages()
+                print("No images found.")
             }
         }
-        
     }
     
     func saveSearchField(){
@@ -112,15 +115,9 @@ extension ImageSearchViewController: UICollectionViewDelegate, UICollectionViewD
         performSegue(withIdentifier: Constants.identifiers.segueId, sender: self)
    }
     
-    internal func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset
-        let bounds = scrollView.bounds
-        let size = scrollView.contentSize
-        let inset = scrollView.contentInset
-        let y = offset.y + bounds.size.height - inset.bottom
-        let h = size.height
-        let reload_distance:CGFloat = 10.0
-        if y > (h + reload_distance) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let yCord = scrollView.contentOffset.y + scrollView.bounds.size.height - scrollView.contentInset.bottom        
+        if yCord > (scrollView.contentSize.height + Constants.collectionConfig.scrollLoad) {
             self.pageNumber = self.pageNumber + 1
             setUpData(searchText: self.sText)
         }

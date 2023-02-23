@@ -21,6 +21,7 @@ class ImageSearchPresenter {
     
     public func getImages(searchText: String, pageNumber: Int, completion:@escaping([ImageModel])->()) {
         guard let url = URL(string: Constants.getUrl(searchStr: searchText, page: pageNumber)) else { return }
+        print(url)
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil else {
                 return
@@ -50,6 +51,7 @@ class ImageSearchPresenter {
     
     public func clearAllImages(){
         self.images = []
+        self.delegate?.presentImages(images: self.images)
     }
     
     public func setViewDelegate(delegate: PresenterDelegate){
